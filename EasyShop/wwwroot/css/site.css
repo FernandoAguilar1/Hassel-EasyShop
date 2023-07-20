@@ -1,3 +1,7 @@
+:root {
+    --mainbg: #ffc72c;
+}
+
 html {
   font-size: 14px;
 }
@@ -14,13 +18,21 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 
+.navbar {
+    background-color: var(--mainbg);
+}
 
+.hero{
+    width:100%;
+}
 
-
+.centerContent{
+    text-align:center;
+}
 
 .tarjeta {
     display: flex;
@@ -63,3 +75,8 @@ body {
             z-index: 1;
             content: ""
         }
+
+
+.logo{
+    width:100px;
+}
