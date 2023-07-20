@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using EasyShop.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasyShop.Data
@@ -9,5 +10,8 @@ namespace EasyShop.Data
             : base(options)
         {
         }
+
+        public DbSet<Product> Products { get; set; }
+
     }
 }
