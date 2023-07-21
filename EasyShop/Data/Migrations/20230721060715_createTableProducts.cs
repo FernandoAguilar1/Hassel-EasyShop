@@ -4,7 +4,7 @@
 
 namespace EasyShop.Data.Migrations
 {
-    public partial class AddProductsTable : Migration
+    public partial class createTableProducts : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

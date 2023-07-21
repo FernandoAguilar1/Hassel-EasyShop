@@ -4,6 +4,7 @@ using EasyShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230721060715_createTableProducts")]
+    partial class createTableProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,22 +72,6 @@ namespace EasyShop.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "89917e95-490f-4569-bde5-3698125e14a5",
-                            ConcurrencyStamp = "1",
-                            Name = "Admin",
-                            NormalizedName = "Admin"
-                        },
-                        new
-                        {
-                            Id = "ede5fdc0-1298-40f6-a826-5dae1f8500a1",
-                            ConcurrencyStamp = "2",
-                            Name = "Customer",
-                            NormalizedName = "Customer"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -176,24 +162,6 @@ namespace EasyShop.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "bcfd7fe6-2200-4a35-b2d8-b4e7d6ad74b7",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca26c837-eb42-4166-be2d-7ceae70ae211",
-                            Email = "admin@easyshop.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@EASYSHOP.COM",
-                            NormalizedUserName = "ADMIN@EASYSHOP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG3OKM0a7ut+PWx1KaMf6rEUPo5CIvxapNGh/r2lXUO4bUyn+WQCiTLqWySrJbdShg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "ab7cbc77-dec0-44f3-a148-ea630a0a5a9d",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@easyshop.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -258,13 +226,6 @@ namespace EasyShop.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "bcfd7fe6-2200-4a35-b2d8-b4e7d6ad74b7",
-                            RoleId = "89917e95-490f-4569-bde5-3698125e14a5"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

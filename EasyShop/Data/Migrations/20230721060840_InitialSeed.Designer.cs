@@ -4,6 +4,7 @@ using EasyShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230721060840_InitialSeed")]
+    partial class InitialSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,14 +76,14 @@ namespace EasyShop.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "89917e95-490f-4569-bde5-3698125e14a5",
+                            Id = "798f6da7-3c62-40da-b74f-0412a2eb7863",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "ede5fdc0-1298-40f6-a826-5dae1f8500a1",
+                            Id = "362f35ab-99c8-4036-be9d-c8a3ab61f104",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
@@ -180,19 +182,19 @@ namespace EasyShop.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bcfd7fe6-2200-4a35-b2d8-b4e7d6ad74b7",
+                            Id = "141d1dd2-be65-41be-ae47-7e96ea47bc2c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca26c837-eb42-4166-be2d-7ceae70ae211",
+                            ConcurrencyStamp = "5f458e53-8438-4733-ac80-80f0e1ebf907",
                             Email = "admin@easyshop.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EASYSHOP.COM",
-                            NormalizedUserName = "ADMIN@EASYSHOP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG3OKM0a7ut+PWx1KaMf6rEUPo5CIvxapNGh/r2lXUO4bUyn+WQCiTLqWySrJbdShg==",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF9lEw2V7EgGv4TMCZMfbMZBh2cIZhmnTM9HL+Wg55vUnHk+VrjR4kjNgpk/HSKhRg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ab7cbc77-dec0-44f3-a148-ea630a0a5a9d",
+                            SecurityStamp = "0dc93ed6-a9fa-4e84-9a4b-a5a5afbc6869",
                             TwoFactorEnabled = false,
-                            UserName = "admin@easyshop.com"
+                            UserName = "admin"
                         });
                 });
 
@@ -262,8 +264,8 @@ namespace EasyShop.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "bcfd7fe6-2200-4a35-b2d8-b4e7d6ad74b7",
-                            RoleId = "89917e95-490f-4569-bde5-3698125e14a5"
+                            UserId = "141d1dd2-be65-41be-ae47-7e96ea47bc2c",
+                            RoleId = "798f6da7-3c62-40da-b74f-0412a2eb7863"
                         });
                 });
 

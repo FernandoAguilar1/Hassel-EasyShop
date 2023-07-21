@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EasyShop.Data;
 using EasyShop.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EasyShop.Controllers
 {
@@ -46,6 +47,7 @@ namespace EasyShop.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
