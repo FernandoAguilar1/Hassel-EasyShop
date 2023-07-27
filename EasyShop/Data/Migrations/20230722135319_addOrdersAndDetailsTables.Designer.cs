@@ -4,6 +4,7 @@ using EasyShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230722135319_addOrdersAndDetailsTables")]
+    partial class addOrdersAndDetailsTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,8 +56,9 @@ namespace EasyShop.Data.Migrations
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("SingleValue")
                         .HasPrecision(6, 2)
@@ -127,14 +130,14 @@ namespace EasyShop.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1951f5e4-e4a3-42fd-be65-52967ca23749",
+                            Id = "f1f50227-6598-401e-bb66-880a8aa56b59",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "6f60d710-16b6-4da0-8512-34635c0fe7f6",
+                            Id = "52b94c24-acc7-4fb5-b3fd-20f2b26641c1",
                             ConcurrencyStamp = "2",
                             Name = "Customer",
                             NormalizedName = "Customer"
@@ -233,17 +236,17 @@ namespace EasyShop.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "415c64b2-f952-42cb-9447-62262826eef1",
+                            Id = "0cc2b7b0-7621-41cf-a3bc-c126c3d62c7a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "446294c1-37fa-4d9f-b4ee-f483ab297e1c",
+                            ConcurrencyStamp = "ce0b0009-bea8-4e05-9acb-c0bee125bc43",
                             Email = "admin@easyshop.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EASYSHOP.COM",
                             NormalizedUserName = "ADMIN@EASYSHOP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC79/S23qPPt5I65k+0sqz1S/AJHbXRbekdP0mmDATnmc0+aG1TaKt9+zFc0IlrFQg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELlpArTltUyeiZhdWM/RDKiBjtvglBdVgjCV2uFumKtfy8qM91zBgSIcWFlonXCMYQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "656d8469-fa31-447c-b4e8-8ad4b401c507",
+                            SecurityStamp = "08ec706b-0647-4464-bd3a-4f95b632371c",
                             TwoFactorEnabled = false,
                             UserName = "admin@easyshop.com"
                         });
@@ -315,8 +318,8 @@ namespace EasyShop.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "415c64b2-f952-42cb-9447-62262826eef1",
-                            RoleId = "1951f5e4-e4a3-42fd-be65-52967ca23749"
+                            UserId = "0cc2b7b0-7621-41cf-a3bc-c126c3d62c7a",
+                            RoleId = "f1f50227-6598-401e-bb66-880a8aa56b59"
                         });
                 });
 

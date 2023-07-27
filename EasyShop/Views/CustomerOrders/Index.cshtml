@@ -1,0 +1,49 @@
+﻿@model EasyShop.Models.Order
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var isCustomer = User.IsInRole("Customer");
+}
+
+<h1>Your Order (Shopping Cart)</h1>
+
+@if (isCustomer)
+{
+    @if (Model == null)
+    {
+        <h4>You haven't place an Order yet. Add a product to see your order</h4>
+    }
+    else
+    {
+        <div>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CustomerId)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CustomerId)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    }
+}
+else
+{
+    <h4>
+        This section is only for registered users, please login to place an order
+    </h4>
+}
+
+
