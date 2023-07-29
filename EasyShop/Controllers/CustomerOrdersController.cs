@@ -17,7 +17,6 @@ namespace EasyShop.Controllers
             _userManager = userManager;
         }
 
-
         public async Task<IActionResult> Index()
         {
             var customerId = _userManager.GetUserId(User); // Get user id:
@@ -28,6 +27,19 @@ namespace EasyShop.Controllers
             if (customerId != null && _context.Orders != null)
             {
                 order = await _context.Orders.FirstOrDefaultAsync(m => m.CustomerId == customerId);
+                if (order != null )
+                {
+                    order.Details = await _context.OrderDetails.Where(od => od.OrderId == order.Id).ToListAsync();
+
+                    //foreach (OrderDetail od in order.Details)
+                    //{
+                    //    od.Product = await _context.Products.Where(p => p.Id == od.ProductId).First();
+
+
+                    //}
+                }
+
+                var completeOrder = _context.Orders.Include("OrderDetails").Where(o => o.CustomerId == customerId);
             }
 
             return View(order);
@@ -40,44 +52,48 @@ namespace EasyShop.Controllers
             {
                 var customerId = _userManager.GetUserId(User); // Get user id:
 
-                //get thisCustomerOrder
-                Order? order = null;
-                order = await _context.Orders.FirstOrDefaultAsync(m => m.CustomerId == customerId);
-
+                //check if product exists
                 Product? product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
                 if (product != null)
                 {
+                    //get thisCustomer Order
+                    Order? order = null;
+                    order = await _context.Orders.FirstOrDefaultAsync(m => m.CustomerId == customerId);
+
                     if (order == null)
                     {
                         order = new Order(customerId);
-
-                        OrderDetail orderDetail = new()
-                        {
-                            ProductId = product.Id,
-                            quantity = quantity,
-                            SingleValue = product.Price,
-                            TotalValue = product.Price * quantity
-                        };
-                        order.Details = new List<OrderDetail> { orderDetail };
-
-                        decimal total = 0;
-                        foreach (OrderDetail od in order.Details)
-                        {
-                            total += od.TotalValue;
-                        }
-                        order.Price = total;
-
                         _context.Orders.Add(order);
-                        _context.SaveChanges();
+                    }
+
+                    //load this order details
+                    List<OrderDetail> details = await _context.OrderDetails.Where(od => od.OrderId == order.Id).ToListAsync();                
+                    order.Details = details;
+
+                    //add item to existing order  
+                    if (details == null || details.Count == 0)
+                    {
+                        //if this order doesn't have details
+
+                        //new order detail by product and quantity
+                        OrderDetail orderDetail = new(product, quantity);
+                        orderDetail.OrderId = order.Id;
+                        order.Details = new List<OrderDetail> { orderDetail };                        
                     }
                     else
                     {
-                        //add item to existing order
+                        //this order already has details
+                        order.updateDetail(product, quantity);
                     }
+
+                    //recalculate total of the order
+                    order.recalculateTotal();
+                    _context.SaveChanges();
                 }
                 else
                 {
-                    //item doesn't exsit, return error 
+                    //item doesn't exist, return error
+                    throw new Exception("this Item doesn't exist in our catalog");
                 }
 
                 return RedirectToAction("Index");
