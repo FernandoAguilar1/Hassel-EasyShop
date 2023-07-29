@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EasyShop.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,6 +22,7 @@ namespace EasyShop.Controllers
         }
 
         // GET: Products
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
               return _context.Products != null ? 
@@ -154,6 +156,11 @@ namespace EasyShop.Controllers
             var product = await _context.Products.FindAsync(id);
             if (product != null)
             {
+                var inOrders = await _context.OrderDetails.Where(od => od.ProductId == id).CountAsync();
+
+                if (inOrders > 0) {
+                    return Problem("This Product belong to a Order, Imposible to delete it.");
+                }
                 _context.Products.Remove(product);
             }
             

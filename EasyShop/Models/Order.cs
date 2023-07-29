@@ -1,19 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 
 namespace EasyShop.Models
 {
     public class Order
     {
+        public int Id { get; set; }
+        public string CustomerId { get; set; } = "";
+        [Precision(6, 2)]
+        [DisplayName("Total Value")]
+        public decimal TotalValue { get; set; }
+        public List<OrderDetail>? Details { get; set; }
+
         public Order(string customerId)
         {
             CustomerId = customerId;
         }
-
-        public int Id { get; set; }
-        public string CustomerId { get; set; } = "";
-        [Precision(6, 2)]
-        public decimal Price { get; set; }
-        public List<OrderDetail>? Details { get; set; }
 
         internal void recalculateTotal()
         {
@@ -25,7 +27,7 @@ namespace EasyShop.Models
                     total += od.TotalValue;
                 }
             }
-            this.Price = total;
+            this.TotalValue = total;
         }
 
         internal void updateDetail(Product product, int quantity)

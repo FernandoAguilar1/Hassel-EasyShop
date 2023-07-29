@@ -31,12 +31,17 @@ namespace EasyShop.Controllers
                 {
                     order.Details = await _context.OrderDetails.Where(od => od.OrderId == order.Id).ToListAsync();
 
-                    //foreach (OrderDetail od in order.Details)
-                    //{
-                    //    od.Product = await _context.Products.Where(p => p.Id == od.ProductId).First();
-
-
-                    //}
+                    foreach (OrderDetail od in order.Details)
+                    {
+                        if (od.ProductId != 0)
+                        {
+                            od.product = await _context.Products.Where(p => p.Id == od.ProductId).FirstAsync();
+                        }
+                        else
+                        {
+                            od.product = null;
+                        }
+                    }
                 }
 
                 var completeOrder = _context.Orders.Include("OrderDetails").Where(o => o.CustomerId == customerId);

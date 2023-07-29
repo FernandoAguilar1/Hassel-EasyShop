@@ -13,6 +13,8 @@ namespace EasyShop.Models
         [Precision(7, 2)]
         public decimal TotalValue { get; set; }
 
+        public Product? product { get; set; }
+
         public OrderDetail() { }
 
         public OrderDetail(Product product, int quantity)
